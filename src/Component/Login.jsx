@@ -6,7 +6,7 @@ export default function Login() {
   const onSubmit =async(e)=>{
       e?.preventDefault()
     try {
-   let response =   await fetch("http://localhost:5000/api/v1/login",{
+   let response =   await fetch(`${import.meta.env.VITE_BACKEND_API}/api/v1/login`,{
         method:"POST",
         headers:{
           "Content-type": "application/json",

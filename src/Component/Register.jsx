@@ -7,7 +7,7 @@ export default function Register() {
    const onSubmit = async(e) =>{
     e.preventDefault()
      try {
-     let aa =  await fetch("http://localhost:5000/api/v1/register",{
+     let aa =  await fetch(`${import.meta.env.VITE_BACKEND_API}/api/v1/register`,{
            method:"POST",
             headers:{
                 "Content-type":"application/json"

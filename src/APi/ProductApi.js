@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const productApi = createApi({
     refetchOnMountOrArgChange: true,
     reducerPath: 'productApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/' ,
+    baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_BACKEND_API}/api/v1/` ,
       prepareHeaders:(headers,{getState})=>{
         headers.set("Authorization",`Bearer ${localStorage.getItem("token")}`)
 
