@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 export default function Login() {
   const navigate = useNavigate()
   const [form,setForm] = useState({})
+  const [error,setError]= useState("")
   const onSubmit =async(e)=>{
       e?.preventDefault()
     try {
@@ -12,10 +13,10 @@ export default function Login() {
           "Content-type": "application/json",
         },
         body:JSON.stringify(form)
-
       }) 
+      let result = await response.json()
       if(response.status == 200){
-        let result = await response.json()
+       
         console.log("result",result?.data?.token)
         if(result?.message == "success"){
           localStorage.setItem("token",result?.data?.token)
@@ -24,15 +25,20 @@ export default function Login() {
           alert(`${result?.data?.Name} your login successfully done`)
           navigate("/")
         }
+      }else{
+        console.log("error",response)
+        setError(result.message)
       }
     } catch (error) {
      console.log("error",error) 
+     setError("some thing went wrong")
     }
 
   }
   const onChange = async(e)=>{
     const {name,value} = e?.target;
     setForm((pre)=>({...pre,[name]:value}))
+    setError("")
   }
   return (
    <>
@@ -63,6 +69,9 @@ export default function Login() {
           <input id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={onChange}/>
         </div>
       </div>
+      <div className='flex justify-center'>
+        {error && <span className='text-base text-red-400'>{error}</span>}
+      </div>
 
       <div>
         <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
@@ -70,8 +79,8 @@ export default function Login() {
     </form>
 
     <p className="mt-10 text-center text-sm text-gray-500">
-      Not a member?
-      <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
+      Already haven't account ?
+      <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" onClick={()=>{navigate("/register")}}> Sign Up </a>
     </p>
   </div>
 </div>

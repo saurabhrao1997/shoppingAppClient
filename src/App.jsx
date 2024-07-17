@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 import ErrorBoundary from "./Component/ErrorBoundry"
 // import './App.css'
 import { Routes,Route } from 'react-router-dom'
+import Loader from './Component/Comman/Loader'
 
 const Home = React.lazy(()=> import("./Component/Home") )
 const Navbar = React.lazy(()=> import("./Component/Navbar") )
@@ -14,6 +15,7 @@ const ProductIndex = React.lazy(()=> import("./Component/Pages/Product/ProductIn
 const CreateProduct = React.lazy(()=> import("./Component/Pages/Product/CreateProduct") )
 const CreateCategory = React.lazy(()=> import("./Component/Pages/Categarry/CreateCategory") )
 const ProductDetails = React.lazy(()=> import("./Component/Pages/Product/ProductDetails") )
+const WishListPage = React.lazy(()=> import("./Component/Wishlist") )
 
 const Login = React.lazy(()=> import("./Component/Login") )
 const Register = React.lazy(()=> import("./Component/Register") )
@@ -41,9 +43,10 @@ const location = useLocation()
   return (
     <>
     <ErrorBoundary fallback="Error">
-    <Suspense  fallback={<>Loading...</>}>
+    <Suspense  fallback={<><Loader/></>}>
      { (location?.pathname !== "/register" && location?.pathname !== "/login") &&  <Navbar/> }
-    <Routes>
+     <div  className='min-h-[calc(100vh-4.600rem)] bg-[url(/background.svg)] bg-no-repeat bg-cover'>
+     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/login' element={<Login/>} />
@@ -53,8 +56,12 @@ const location = useLocation()
       <Route  path='/productdetail/:id' element={<ProductDetails/>} />
       <Route path='/createproduct' element={<CreateProduct/>} />
       <Route path='/createcategory' element={<CreateCategory/>} />
+      <Route path='/wishlist' element={<WishListPage/>} />
    
     </Routes>
+
+     </div>
+
     </Suspense>
     </ErrorBoundary>
     

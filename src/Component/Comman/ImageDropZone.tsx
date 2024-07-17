@@ -55,7 +55,7 @@ export default function ImageDropZone({onCLick}) {
       <input {...getInputProps()} />
 
       {
-         <div className='border-red-400 border-2 border-dashed px-4 py-4 cursor-pointer'>
+         <div className='border-red-400 border-2 border-dashed px-4 py-14 cursor-pointer'>
              <p>Drop the files here ...</p> 
              <p>Drag 'n' drop some files here, or click to select files</p>
 

@@ -40,7 +40,7 @@ useEffect(()=>{
    
     <div className='flex flex-col gap-y-4 mt-10 items-center'>
     <div className='border-2 w-32 h-32 rounded-full flex flex-col justify-center items-center'>
-      <img className='w-full h-full rounded-full ' src={getUserData?.data?.image} alt="no image uploaded yet" />
+      <img className='w-full h-full rounded-full ' src={getUserData?.data?.image?.url} alt="no image uploaded yet" />
       
 
      

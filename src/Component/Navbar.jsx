@@ -1,16 +1,18 @@
 import React,{useEffect,useState} from 'react'
-import {NavLink} from "react-router-dom"
+import {Navigate, NavLink} from "react-router-dom"
 import {useGetUserDetailQuery} from "../APi/userAPi"
-
+import { useSelector, useDispatch } from 'react-redux'
 export default function Navbar() {
   const [hoverProfile,setHoverProfile] = useState(false)
   let {data:getUserData,isLoading:userLoading}= useGetUserDetailQuery(localStorage.getItem("userId"),{skip:!localStorage.getItem("userId")})
+  const wishlist = useSelector((state)=> state.wishlist)
+console.log("wishlist navabr",wishlist,wishlist?.wishlist?.length)
   return (
 
 
 <>
 <nav className="bg-gray-800">
-  <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+  <div className="mx-auto  px-10 ">
     <div className="relative flex h-16 items-center justify-between">
       <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
     
@@ -32,19 +34,61 @@ export default function Navbar() {
           <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"/>
         </div>
         <div className="hidden sm:ml-6 sm:block">
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 items-center">
          
-            <NavLink to="/" className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</NavLink>
-            <NavLink to="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</NavLink>
-            <NavLink to="/register" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</NavLink>
-            <NavLink to="/productindex" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">product</NavLink>
-            <NavLink to="/createproduct" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">create Product</NavLink>
-            <NavLink to="/createcategory" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Create Category</NavLink>
+            <NavLink to="/"
+              className={({ isActive, isPending }) =>
+                isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              }
+            //  className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" 
+            //  aria-current="page"
+             >Home</NavLink>
+           
+            <NavLink to="/productindex" 
+            // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className={({ isActive, isPending }) =>
+              isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            }
+            >Product</NavLink>
+            <NavLink to="/createproduct" 
+            // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className={({ isActive, isPending }) =>
+              isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            }
+            >Create Product</NavLink>
+            <NavLink to="/createcategory" 
+            // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className={({ isActive, isPending }) =>
+              isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            }
+            >Create Category</NavLink>
+            <div className='relative '>
+           { wishlist?.wishlist?.length > 0 &&  <span className='absolute -top-3 -right-3 bg-red-400 text-white border-2 px-2  rounded-full'>{wishlist?.wishlist?.length}</span>}
+
+            <NavLink to="/wishlist" 
+            // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className={({ isActive, isPending }) =>
+              isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            }
+            >Wishlist</NavLink>
+            </div>
             
           </div>
         </div>
       </div>
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <NavLink to="/login" 
+            // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className={({ isActive, isPending }) =>
+              isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            }
+            >Login</NavLink>
+            <NavLink to="/register" 
+             className={({ isActive, isPending }) =>
+              isPending ? "loading.." : isActive ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            }
+            // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Register</NavLink>
         <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="absolute -inset-1.5"></span>
           <span className="sr-only">View notifications</span>
@@ -60,7 +104,7 @@ export default function Navbar() {
               <span className="sr-only">Open user menu</span>
        
 
-              <img className="h-8 w-8 rounded-full" src={getUserData?.data?.image}alt="" />
+              <img className="h-8 w-8 rounded-full" src={getUserData?.data?.image?.url}alt="" />
             
             </button>
           </div>
@@ -70,7 +114,7 @@ export default function Navbar() {
       
             <NavLink to="/profile" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</NavLink>
             <NavLink to="/setting" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</NavLink>
-            <NavLink to="/login" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" onClick={()=>{localStorage.setItem("token",null);localStorage.setItem("userName",null);localStorage.setItem("userId",null)}}>Sign out</NavLink>
+            <NavLink to="/login" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" onClick={()=>{  localStorage.clear();Navigate("/login") }}>Sign out</NavLink>
           </div>}
         </div>
       </div>

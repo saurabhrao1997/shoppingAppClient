@@ -14,7 +14,13 @@ export default function  Home () {
   return (
     <>
     
-   <h1 className='flex justify-center font-bold'>Home</h1>
+    <div className='flex justify-between w-full py-10 bg-slate-600 px-10 mb-10'>
+
+<div className="text-start  font-semibold text-[24px] capitalize   text-white">Home</div> 
+<div>
+  {/* <input type="text"  className='border-2 px-4 py-1 rounded-full'/> <span className='border-2 border-white px-2 py-1 text-white rounded-lg'>Search</span> */}
+</div>
+</div>
 
     <div className='flex min-h-[500px] justify-center items-center'>
       <div className=''>
