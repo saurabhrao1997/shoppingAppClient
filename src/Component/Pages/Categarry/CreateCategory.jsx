@@ -18,19 +18,24 @@ const [createCategory] = useCreateCategoryMutation()
   return (
     
     <div className=''>
-        <span>CreateCategory</span>
-        <form action="" onSubmit={onSubmit}>
+         
+    <div className='flex justify-between w-full py-10 bg-slate-600 px-10 mb-10'>
 
+<div className="text-start  font-semibold text-[24px] capitalize   text-white">Create category</div> 
+</div>
+
+        <form action="" className='px-10 flex flex-col gap-4 border-2 mx-2 rounded-lg shadow-lg' onSubmit={onSubmit}>
+      <span className='text-[20px]'>Form</span>
         <div>
-             <spam>label</spam>
+             <spam>Label :</spam>
              <input type="text" className='border-2 rounded-lg' name='label' onChange={onChange} />
         </div>
         <div>
-             <spam>value</spam>
+             <spam>Value :</spam>
              <input type="text" className='border-2 rounded-lg' name='value' onChange={onChange} />
         </div>
            <div>
-            <button type='submit'>
+            <button type='submit' className='border-2 px-4 py-1 rounded-lg ml-20 mb-2'>
                 submit
             </button>
            </div>
@@ -38,12 +43,17 @@ const [createCategory] = useCreateCategoryMutation()
         </form>
 
 
-     { category &&  <div className='flex flex-wrap'>
+     { category &&  <div className='border-2 my-10 py-10 px-10 mx-2 rounded-lg shadow-lg'>
+      <span className='text-[20px]'>List of Category</span>
+      <div className='flex flex-wrap  gap-4 mt-4'>
       {  category?.data?.map((obj)=>{
            return(
             <div className='border-2 rounded-md px-2 py-1'>{obj?.label}</div>
            )
       })}
+
+      </div>
+     
         </div>}
        
         

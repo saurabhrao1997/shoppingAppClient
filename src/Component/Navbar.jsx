@@ -12,7 +12,7 @@ console.log("wishlist navabr",wishlist,wishlist?.wishlist?.length)
 
 <>
 <nav className="bg-gray-800">
-  <div className="mx-auto  px-10 ">
+  <div className="mx-auto  px-10">
     <div className="relative flex h-16 items-center justify-between">
       <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
     
