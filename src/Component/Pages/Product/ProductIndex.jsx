@@ -1,5 +1,5 @@
-import React ,{useState}from 'react'
-import {useGetAllProductDetailQuery,useDeleteProductMutation} from "../../../APi/ProductApi"
+import React ,{useState,useEffect}from 'react'
+import {useGetAllProductDetailQuery,useDeleteProductMutation, useGetSearchProductQuery} from "../../../APi/ProductApi"
 import {useNavigate} from "react-router-dom"
 import Delete from '../../Comman/Delete'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,19 +14,40 @@ export default function ProductIndex() {
   const wishlist = useSelector((state)=> state.wishlist)
   const [deleteId,setDeleteId] = useState({})
   const [showModal,setShowModal] = useState(false)
+  const [search,setSearch] = useState("")
+  const [searchVal,setSearchVal] = useState("")
+  const [productData,setProductData] = useState({})
   console.log("wishLiist",wishlist)
   const dispatch = useDispatch()
-    const {data:productData,isLoading:productLoading} = useGetAllProductDetailQuery()
+    const {data:productDatas,isLoading:productLoading} = useGetAllProductDetailQuery()
     const [deleteProduct,{isLoading:deleteLoading}] = useDeleteProductMutation()
+    const {data:searchProductData} = useGetSearchProductQuery(search,{skip:!search})
     console.log("proudct",productData)
-  
+   const onHandleChange = (e)=>{
+    
+      setSearchVal(e?.target?.value)
+      if(e?.target?.value == ""){
+        setSearch("")
+        setProductData(productDatas)
+      }
+   }
+
+useEffect(()=>{
+   if(productDatas && !searchVal){
+    setProductData(productDatas)
+   }
+   if(searchVal && searchProductData){
+    setProductData(searchProductData)
+   }
+},[productDatas,searchProductData])
   return (
     <div className=''>
       <div className='flex justify-between w-full py-10 bg-slate-600 px-10 mb-10'>
 
       <div className="text-start  font-semibold text-[24px] capitalize   text-white">Product</div> 
       <div>
-        <input type="text"  className='border-2 px-4 py-1 rounded-full'/> <span className='border-2 border-white px-2 py-1 text-white rounded-lg'>Search</span>
+        <input type="text"  className='border-2 px-4 py-1 rounded-full'onChange={onHandleChange}/> 
+        <span className='border-2 border-white px-2 py-1 text-white rounded-lg' onClick={()=>{setSearch(searchVal)}}>Search</span>
       </div>
       </div>
 <div className='flex flex-wrap gap-10 px-10'>

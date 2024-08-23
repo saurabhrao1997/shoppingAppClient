@@ -17,7 +17,11 @@ export const productApi = createApi({
         query: (id) => `getproduct?id=${id}`,
         providesTags:["product"]
       }),
-      
+
+      getSearchProduct: builder.query({
+        query: (name) => `searchproduct?name=${name}`,
+        providesTags:["product"]
+      }),
 
       getAllProductDetail: builder.query({
         query: () => `getallproduct`,
@@ -73,4 +77,4 @@ export const productApi = createApi({
     //   }),
     }),
   })
-  export const { useCreateProductMutation,useGetAllProductDetailQuery,useGetProductDetailQuery,useUpdateProductMutation,useDeleteProductMutation } = productApi
+  export const { useCreateProductMutation,useGetAllProductDetailQuery,useGetProductDetailQuery,useUpdateProductMutation,useDeleteProductMutation,useGetSearchProductQuery } = productApi

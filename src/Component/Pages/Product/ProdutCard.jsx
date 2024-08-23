@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import WishListIcon  from "../../Comman/WishListIcon"
 import Delete from '../../Comman/Delete';
-export default function ProdutCard({id,url,name,description,offer,discount,onCardClick,onDeleteClick,onWishList}) {
+export default function ProdutCard({id,url,name,description,offer,discount,onCardClick,onDeleteClick,onWishList,showAdditionFeature=true}) {
     const Navigate = useNavigate()
     let someDiv = {
         lineHeight: "1.5em",
@@ -29,7 +29,7 @@ export default function ProdutCard({id,url,name,description,offer,discount,onCar
      <div><span className='text-gray-400 font-bold'>Discount : </span>{discount}</div>
 
      </div>
-   <div className='flex justify-end items-end gap-2'>
+ { showAdditionFeature && <div className='flex justify-end items-end gap-2'>
    <div className=''onClick={onDeleteClick}>
    
    <Delete />
@@ -38,7 +38,7 @@ export default function ProdutCard({id,url,name,description,offer,discount,onCar
  <WishListIcon selected={wishlist?.wishlist.find((objj)=> objj?._id == id)}/>
   </div>
 
-   </div>
+   </div>}
    </div>
 
 
