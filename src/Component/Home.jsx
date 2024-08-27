@@ -3,7 +3,7 @@
 
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../Slices/CounterSlice'
+import { decrement, increment ,incrementByAmount} from '../Slices/CounterSlice'
 import {useGetAllProductDetailQuery} from "../APi/ProductApi"
 export default function  Home () {
   const count =    useSelector((state) => state.counter.value)
@@ -21,23 +21,28 @@ export default function  Home () {
   {/* <input type="text"  className='border-2 px-4 py-1 rounded-full'/> <span className='border-2 border-white px-2 py-1 text-white rounded-lg'>Search</span> */}
 </div>
 </div>
-
-    <div className='flex min-h-[500px] justify-center items-center'>
+  
+    <div className='flex flex-col gap-y-4 min-h-[500px] justify-center items-center'>
+    <div className=''>
+    <input type="number" className='border border-gray-400' onChange={(e)=>{dispatch(incrementByAmount(Number(e?.target?.value)))}}/>
+   </div>
       <div className=''>
+      <button
+          aria-label="Decrement value"
+           className='border-2 px-4 py-1 text-bold rounded-[5px]'
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+       
+        <span className='mx-10'>{count}</span>
+     
         <button
           aria-label="Increment value"
           className='border-2 px-4 py-1 text-bold rounded-[5px]'
           onClick={() => dispatch(increment())}
         >
           Increment
-        </button>
-        <span className='mx-10'>{count}</span>
-        <button
-          aria-label="Decrement value"
-           className='border-2 px-4 py-1 text-bold rounded-[5px]'
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
         </button>
       </div>
     </div>
