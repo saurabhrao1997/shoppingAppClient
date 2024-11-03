@@ -1,8 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {addToWishlist, RemoveFromWishList, RemoveAllWishlist  } from '../Slices/WishListSlice'
-import Delete from './Comman/Delete'
+import Delete from '../Component/Comman/Delete'
+import { useNavigate } from 'react-router-dom'
 export default function Wishlist() {
+  const navigate = useNavigate()
     const wishList = useSelector((state)=> state.wishlist)
     const dispatch = useDispatch()
     console.log("wishList",wishList)
@@ -39,6 +41,11 @@ export default function Wishlist() {
               </div>
             );
           })}
+      </div>
+      <div className='flex justify-center'>
+        <button className='transition-all hover:shadow-lg px-4 py-1 bg-orange-500 hover:bg-orange-800 text-white rounded-full' 
+        onClick={()=>{navigate("/placeorder")}}
+        >Place Order</button>
       </div>
     </>
   );

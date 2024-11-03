@@ -8,6 +8,7 @@ import { Routes,Route } from 'react-router-dom'
 import Loader from './Component/Comman/Loader'
 
 const Home = React.lazy(()=> import("./Component/Home") )
+const AllUsers = React.lazy(()=> import("./Component/Users") )
 const Navbar = React.lazy(()=> import("./Component/Navbar") )
 const Setting = React.lazy(()=> import("./Component/Setting") )
 const Profile = React.lazy(()=> import("./Component/Profile") )
@@ -15,6 +16,7 @@ const ProductIndex = React.lazy(()=> import("./Component/Pages/Product/ProductIn
 const CreateProduct = React.lazy(()=> import("./Component/Pages/Product/CreateProduct") )
 const CreateCategory = React.lazy(()=> import("./Component/Pages/Categarry/CreateCategory") )
 const ProductDetails = React.lazy(()=> import("./Component/Pages/Product/ProductDetails") )
+const OrderPace = React.lazy(()=> import("./Component/Pages/Oder/PlaceOder") )
 const WishListPage = React.lazy(()=> import("./Component/Wishlist") )
 
 const Login = React.lazy(()=> import("./Component/Login") )
@@ -43,11 +45,12 @@ const location = useLocation()
   return (
     <>
     <ErrorBoundary fallback="Error">
-    <Suspense  fallback={<><Loader/></>}>
+    <Suspense  fallback={<div className='absolute top-0 w-full min-h-screen'><Loader/></div>}>
      { (location?.pathname !== "/register" && location?.pathname !== "/login") &&  <Navbar/> }
      <div  className='min-h-[calc(100vh-4.600rem)] bg-[url(/background.svg)] bg-no-repeat bg-cover'>
      <Routes>
       <Route path='/' element={<Home/>} />
+      <Route path='/users' element={<AllUsers/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/login' element={<Login/>} />
       <Route path='/profile' element={<Profile/>} />
@@ -57,6 +60,7 @@ const location = useLocation()
       <Route path='/createproduct' element={<CreateProduct/>} />
       <Route path='/createcategory' element={<CreateCategory/>} />
       <Route path='/wishlist' element={<WishListPage/>} />
+      <Route path='/placeorder' element={<OrderPace/>} />
    
     </Routes>
 

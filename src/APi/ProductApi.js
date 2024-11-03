@@ -38,6 +38,16 @@ export const productApi = createApi({
            ,
            invalidatesTags:["product"]
       }),
+      reviewProduct: builder.mutation({
+        query: (body) => ({
+               url: `reviewproduct`,
+               method: "POST",
+               body:body,
+
+            })
+           ,
+           invalidatesTags:["product"]
+      }),
 
       updateProduct: builder.mutation({
         query: (body) => ({
@@ -77,4 +87,11 @@ export const productApi = createApi({
     //   }),
     }),
   })
-  export const { useCreateProductMutation,useGetAllProductDetailQuery,useGetProductDetailQuery,useUpdateProductMutation,useDeleteProductMutation,useGetSearchProductQuery } = productApi
+  export const {
+     useCreateProductMutation,
+    useGetAllProductDetailQuery,
+    useGetProductDetailQuery,
+    useUpdateProductMutation,
+    useDeleteProductMutation,
+    useGetSearchProductQuery,
+    useReviewProductMutation } = productApi
