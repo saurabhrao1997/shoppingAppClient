@@ -13,8 +13,12 @@ export const orderApi = createApi({
     }),
     tagTypes: ["order"],
     endpoints: (builder) => ({
-      getOrer: builder.query({
-        query: () => `getorder`,
+      getAllOrder: builder.query({
+        query: () => `allOrders`,
+        providesTags:["order"]
+      }),
+      getpaypalToken:builder.query({
+        query: () => `getpaypalToken`,
         providesTags:["order"]
       }),
       
@@ -24,7 +28,7 @@ export const orderApi = createApi({
     //     providesTags:["order"]
     //   }),
 
-      createCategory: builder.mutation({
+      createOder: builder.mutation({
         query: (body) => ({
                url: `createorder`,
                method: "POST",
@@ -68,4 +72,4 @@ export const orderApi = createApi({
     //   }),
     }),
   })
-  export const {useCreateCategoryMutation,useGetOrerQuery} = orderApi
+  export const {useCreateOderMutation,useGetAllOrderQuery,useGetpaypalTokenQuery} = orderApi

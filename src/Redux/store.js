@@ -4,7 +4,7 @@ import {userApi} from "../APi/userAPi"
 import {productApi} from "../APi/ProductApi"
 import {categoryApi} from "../APi/CategoryApi"
 import {reviewApi} from "../APi/ReviewApi"
-
+import {orderApi} from "../APi/OrderApi"
 import counterReducer from "../Slices/CounterSlice"
 import wishlistReducer from "../Slices/WishListSlice"
 export const store = configureStore({
@@ -15,7 +15,7 @@ export const store = configureStore({
     [productApi.reducerPath]: productApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [reviewApi.reducerPath]: reviewApi.reducer,
-    
+    [orderApi.reducerPath]:orderApi.reducer,
 
   },
   middleware: (getDefaultMiddleware) =>
@@ -23,7 +23,8 @@ export const store = configureStore({
   .concat(userApi.middleware)
   .concat(productApi.middleware)
   .concat(categoryApi.middleware)
-  .concat(reviewApi.middleware),
+  .concat(reviewApi.middleware)
+  .concat(orderApi.middleware),
 })
 setupListeners(store.dispatch)
 
