@@ -2,11 +2,14 @@ import React,{useEffect,useState} from 'react'
 import {Navigate, NavLink} from "react-router-dom"
 import {useGetUserDetailQuery} from "../APi/userAPi"
 import { useSelector, useDispatch } from 'react-redux'
+import Modal from "../Component/Comman/Modal"
+import Notification from './Notification'
 export default function Navbar() {
   const [hoverProfile,setHoverProfile] = useState(false)
   let {data:getUserData,isLoading:userLoading}= useGetUserDetailQuery(localStorage.getItem("userId"),{skip:!localStorage.getItem("userId")})
   const wishlist = useSelector((state)=> state.wishlist)
 console.log("wishlist navabr",wishlist,wishlist?.wishlist?.length)
+const [showNotification,setShowNotification] = useState(false)
   return (
 
 
@@ -112,7 +115,9 @@ console.log("wishlist navabr",wishlist,wishlist?.wishlist?.length)
             }
             // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
             >Register</NavLink>
-        <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+        <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+        onClick={()=>{setShowNotification(!showNotification)}}
+        >
           <span className="absolute -inset-1.5"></span>
           <span className="sr-only">View notifications</span>
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
@@ -157,6 +162,24 @@ console.log("wishlist navabr",wishlist,wishlist?.wishlist?.length)
 </nav>
 
 
+
+{
+  showNotification &&
+ 
+    <div
+            className={` shadow-2xl  bg-pink-300  top-16 right-0 w-[20vw] py-2 pl-2 text-white fixed h-full z-40 transition ease-in-out duration-300 ${
+              showNotification ? "translate-x-0 " : "translate-x-full"
+            } `}
+          >
+             <Notification/>
+
+
+          </div>
+  
+  
+  
+  
+}
 
 </>
   )
